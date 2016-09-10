@@ -13,7 +13,7 @@ that aligns images (near) perfectly horizontally, and has a fullscreen image vie
 ### Installation
 Download or clone, and copy the `src/` contents into your `scripts` folder:
 
-'''
+```
 ├── root/
 |    ├── scripts/
 |    |    ├── gallery.js
@@ -21,21 +21,23 @@ Download or clone, and copy the `src/` contents into your `scripts` folder:
 |    |    ├── ...
 |    ├── ...
 ├── ...  
-'''
+```
 ### Usage
 Inside your `.html` / `.php` file add:
-'''html
+
+```html
 <script type="text/javascript" src="path/to/gallery.js"></script>
-'''
+```
+
 to your `<head></head>`
 
-'''html
+```html
 <head>
   <title></title>
   <meta content="">
   <script type="text/javascript" src="path/to/gallery.js"></script>
 </head>
-'''
+```
 
 Inside your body create a container `<div class="gallery"></div>` with the class
 'gallery' or other and inside that place your images `<img></img>` ...
