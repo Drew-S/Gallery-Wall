@@ -56,6 +56,12 @@ show.
 It is best to play with the containers size and the `min-width` to get the images
 to a point you like
 
+### License
+Released under the [MIT license](http://www.opensource.org/licenses/MIT).
+
+### Author
+Drew Sommer
+
 ### Preview
 ![preview][pre]
 
