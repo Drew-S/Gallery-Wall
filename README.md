@@ -41,8 +41,8 @@ to your `<head></head>`
 </head>
 ```
 
-Inside your body create a container `<div class="gallery"></div>` with the class
-'gallery' or other and inside that place your images `<img></img>` ...
+Inside your body create a container `<div class="gallery"></div>` (div only used as example) with the class
+'gallery' and inside that place your images `<img></img>` ...
 
 The script will take care of the rest.
 
