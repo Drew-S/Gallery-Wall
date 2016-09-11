@@ -5,7 +5,7 @@ that aligns images (near) perfectly horizontally, and has a fullscreen image vie
 
 [Live preview of the site](https://drew-s.github.io/Gallery-Wall/index.html)
 
-###### Features
+### Features
 -   Gallery wall (auto resizes with screen)
 -   Fullscreen mode (with smooth animations)
 -   Mobile support
