@@ -3,7 +3,7 @@
 Gallery Wall is a simple to use gallery system that you can add to your website
 that aligns images (near) perfectly horizontally, and has a fullscreen image viewer.
 
-[Live preview of the site](a simple to use gallery system that you can add to your website that aligns images (near) perfectly horizontally, and has a fullscreen image viewer.)
+[Live preview of the site](https://drew-s.github.io/Gallery-Wall/index.html)
 
 ###### Features
 -   Gallery wall (auto resizes with screen)
