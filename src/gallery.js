@@ -11,6 +11,7 @@
 
   Some css stylings are required to work, see provided css file
 */
+//test
 
 var Gallery = new function(){
 
