@@ -70,7 +70,7 @@ Released under the [MIT license](http://www.opensource.org/licenses/MIT).
 Drew Sommer
 
 ### Preview
-__None of the images used to show the gallery are owned or claimed to be owned by the auhtor.__
+__None of the images used to show the gallery are owned or claimed to be owned by the author.__
 
 _Images were retreived from [deviant art] (http://www.deviantart.com/browse/all/resources/)_
 
