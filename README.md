@@ -63,6 +63,10 @@ to a point you like
 -   Opera
 -   Firefox
 
+#### Tested on Android (browsers)
+-   Firefox
+-   Chrome
+
 ### License
 Released under the [MIT license](http://www.opensource.org/licenses/MIT).
 
