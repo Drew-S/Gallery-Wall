@@ -58,7 +58,7 @@ show.
 It is best to play with the containers size and the `min-width` to get the images
 to a point you like
 
-### Tested on Manjaro Linux(browsers):
+### Tested on Manjaro Linux (browsers)
 -   Vivaldi (chrome)
 -   Opera
 -   Firefox
