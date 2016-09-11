@@ -58,6 +58,11 @@ show.
 It is best to play with the containers size and the `min-width` to get the images
 to a point you like
 
+####### tested on Manjaro Linux(browsers):
+-   Vivaldi (chrome)
+-   Opera
+-   Firefox
+
 ### License
 Released under the [MIT license](http://www.opensource.org/licenses/MIT).
 
