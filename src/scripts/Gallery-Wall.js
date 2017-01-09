@@ -58,7 +58,7 @@
        *    Output(s): TYPE (INFO)
        */
       this.config = (options) => {
-        if(options){
+        if(options){//
 
         }
 
