@@ -7,50 +7,76 @@ I got to be honest, this system was not developed vary well. It works but is mes
 Gallery Wall is a simple to use gallery system that you can add to your website
 that aligns images (near) perfectly horizontally, and has a fullscreen image viewer.
 
-[Live preview of the site](https://drew-s.github.io/Gallery-Wall/index.html)
-
 ### Features
 -   Gallery wall (auto resizes with screen)
--   Fullscreen mode (with smooth animations)
 -   Mobile support
--   Mobile fullscreen mode
 -   Multiple Gallery(s) (albums)
 
 ### Installation
 Download or clone, and copy the `src/` contents into your `scripts` folder:
 
 ```
-├── root/
-|    ├── scripts/
-|    |    ├── gallery.js
-|    |    |    ├──imgs/
-|    |    ├── ...
-|    ├── ...
-├── ...  
+root
+|--- css
+|    |--- gallery-wall.css
+|
+|--- scripts
+|    |--- Gallery-Wall.js
+|
+|...
 ```
 ### Usage
-Inside your `.html` / `.php` file add:
+
+If your using a vanilla browser, you can use the script directly:
+
+#### Setting up the script
 
 ```html
-<script type="text/javascript" src="path/to/gallery.js"></script>
+<script type="text/javascript" src="path/to/Gallery-Wall.js"></script>
 ```
 
-to your `<head></head>`
+You can also use the script using the **AMD** standard, with **require.js:**
+
+```javascript
+requirejs(['/path/to/Gallery-Wall'], (GalleryWall) => {
+
+});
+```
+
+And you can use it with **common.js:**
+
+```javascript
+var GalleryWall = require('/path/to/Gallery-Wall');
+```
+
+#### Setting up the images
+
+Inside your html file fill in a div with your images like so:
 
 ```html
-<head>
-  <title></title>
-  <meta content="">
-  <script type="text/javascript" src="path/to/gallery.js"></script>
-</head>
+<div id="some-gallery" class="gallery-wall">
+  <img src="image1.png" />
+  <img src="image2.png" />
+  ...
+</div>
+```
+The class has to be set as shown.
+
+You can file this element out however you like, I have used a `PHP` script that read a directory of images into img elements tossing them into the div.
+
+#### Running init()
+
+Now that everything is setup you start the system like so:
+
+```javascript
+var gallery = new GalleryWall(document.getElementById('some-gallery'));
+gallery.init();
 ```
 
-Inside your body create a container `<div class="gallery"></div>` (div only used as example) with the class
-'gallery' and inside that place your images `<img></img>` ...
-
-The script will take care of the rest.
+_this is called inside requirejs, after require in commonjs, or after the script has been set in vanilla browser_
 
 ### Known issues
+
 Due to the nature of the script having a `min-width` for the images, if the browser
 or the gallery container is too small (width) images will not shrink below the
 `min-width` causing empty space to the right of images.
@@ -64,36 +90,9 @@ to a point you like
 
 ### Tested on Manjaro Linux (browsers)
 -   Vivaldi (chrome)
--   Opera
--   Firefox
-
-#### Tested on Android (browsers)
--   Firefox
--   Chrome
 
 ### License
 Released under the [MIT license](http://www.opensource.org/licenses/MIT).
 
 ### Author
 Drew Sommer
-
-### Preview
-__None of the images used to show the gallery are owned or claimed to be owned by the author.__
-
-_Images were retreived from [deviant art] (http://www.deviantart.com/browse/all/resources/)_
-
-![preview][pre]
-
-##### Fullscreen
-![fullscreen][full]
-
-##### Mobile
-![Mobile][mob]
-
-##### Mobile Fullscreen
-![Mobile Fullscreen][mobfull]
-
-[pre]: ./preview/Preview.png
-[full]: ./preview/Fullscreen.png
-[mob]: ./preview/Mobile.png
-[mobfull]: ./preview/MobileFullscreen.png
