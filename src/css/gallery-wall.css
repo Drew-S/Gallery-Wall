@@ -1,0 +1,33 @@
+.gallery-wall {
+  height: 100%;
+  display: table;
+}
+
+.gallery-wall > div {
+  height: 300px;
+  margin: 8px;
+  position: relative;
+  float: left;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+
+}
+
+.gallery-wall > div > img {
+  height: 100%;
+
+}
+
+.gallery-wall > div > div {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+}
+
+.gallery-wall > div > div:hover {
+  box-shadow: inset 0em 0em 3em 0.25em lightblue;
+
+}
