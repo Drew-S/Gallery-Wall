@@ -1,5 +1,9 @@
 # Gallery Wall
 
+**NOTICE**
+
+I got to be honest, this system was not developed vary well. It works but is messy. I would recomend using a different system, thanks. I am working on updating this system, but because of the mess, and what I want to accomplish with it I will have to be making it from scratch. That being said I hope to develop a cleaner system. One that will be easier and more modular.
+
 Gallery Wall is a simple to use gallery system that you can add to your website
 that aligns images (near) perfectly horizontally, and has a fullscreen image viewer.
 
