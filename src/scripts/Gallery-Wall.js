@@ -45,7 +45,7 @@
       this.options = {
         imageHeight: 300,
         margin: 8,
-        minWidth: 400
+        minWidth: 200 //minWidth <= imageHeight
 
       };
 
@@ -57,8 +57,11 @@
        *
        *    Output(s): TYPE (INFO)
        */
-      this.config = (options) => {
-        if(options){//
+      this.config = (ops) => {
+        if(ops){
+          if(ops.imageHeight) this.options.imageHeight = ops.imageHeight;
+          if(ops.margin) this.options.margin = ops.margin;
+          if(ops.minWidth) this.options.minWidth = ops.minWidth;
 
         }
 
@@ -78,11 +81,10 @@
         var childNodes = this.gallery.childNodes;
         var ops = this.options;
 
-        if(this.initiated == false){
+        if(!this.initiated){
           this.initiated = true;
           var self = this;
-          window.addEventListener("resize", () => { self.init() }, false);
-
+          window.addEventListener("resize", () => { self.init(); }, false);
 
           if(this.mobileCheck()){
             ops.imageHeight += 200;
@@ -97,20 +99,26 @@
               div.appendChild(div2);
               div.style.width = "auto";
               this.gallery.appendChild(div);
+              i--;
+
             }
 
           }
 
-          for(var i of childNodes){
-            if(i.tagName == "IMG"){
-              this.gallery.removeChild(i);
+          for(var i=0; i<this.gallery.childNodes.length; i++){
+            if(this.gallery.childNodes[i].tagName == "IMG"){
+              this.gallery.removeChild(this.gallery.childNodes[i]);
+              i--;
+
             }
 
           }
+          // this.init();
+
         }
 
         for(var i=0; i<children.length; i++){
-          if(children[i].tagName == "DIV"){
+          if(children[i].tagName == "DIV" || children[i].tagName == "IMG"){
             children[i].style.width = "auto";
 
           }
@@ -123,22 +131,22 @@
         var start = 0;
         for(var i=0; i<children.length; i++){
           if(children[i].tagName == "DIV"){
-            console.log(children[i].offsetWidth + ", " + widthCur + ", " + widthTotal);
-            widthCur += children[i].offsetWidth + (ops.margin * 2) + 1;
+            children[i].firstChild.style.visibility = "visible";
+            widthCur += children[i].offsetWidth + (ops.margin * 2);
             if(widthCur >= widthTotal){
               this.setWidth(children, start, i, widthCur, widthTotal, ops.minWidth);
-              var widthCur_2 = 0;
-              if(this.mobileCheck()){ // not sure why, but needed to run twice when on mobile
-                for(var j=start; j<i; j++){
-                  widthCur_2 += children[i].offsetWidth + (ops.margin * 2) + 1;
-                  if(widthCur_2 >= widthTotal){
-                    this.setWidth(children, start, i, widthCur, widthTotal, ops.minWidth);
-
-                  }
-
-                }
-
-              }
+              // if(this.mobileCheck()){ // not sure why, but needed to run twice when on mobile
+              //   var widthCur2 = 0;
+              //   for(var j=start; j<i; j++){
+              //     widthCur2 += children[i].offsetWidth + (ops.margin * 2);
+              //     if(widthCur2 >= widthTotal){
+              //       this.setWidth(children, start, i, widthCur, widthTotal, ops.minWidth);
+              //
+              //     }
+              //
+              //   }
+              //
+              // }
 
               widthCur = 0;
               start = i+1;
@@ -167,8 +175,8 @@
             sacrifice.push(0);
 
           } else {
-
             sacrifice.push(children[i].clientWidth - minWidth);
+
           }
 
         }

@@ -1,0 +1,197 @@
+.center {
+  position: absolute;
+  text-align: center;
+}
+.center::before {
+  content: "";
+  height: 100%;
+  display: inline-block;
+  vertical-align: middle;
+}
+.center img {
+  display: inline-block;
+  vertical-align: middle;
+}
+#gallery-wall-fullscreen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.85);
+  visibility: hidden;
+  overflow: hidden;
+}
+#gallery-wall-fullscreen-left {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  text-align: center;
+  left: 0;
+}
+#gallery-wall-fullscreen-left::before {
+  content: "";
+  height: 100%;
+  display: inline-block;
+  vertical-align: middle;
+}
+#gallery-wall-fullscreen-left img {
+  display: inline-block;
+  vertical-align: middle;
+}
+#gallery-wall-fullscreen-left img {
+  box-shadow: 1em 1em 3em 0.25em black;
+}
+#gallery-wall-fullscreen-right {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  text-align: center;
+  right: 0;
+}
+#gallery-wall-fullscreen-right::before {
+  content: "";
+  height: 100%;
+  display: inline-block;
+  vertical-align: middle;
+}
+#gallery-wall-fullscreen-right img {
+  display: inline-block;
+  vertical-align: middle;
+}
+#gallery-wall-fullscreen-right img {
+  box-shadow: 1em 1em 3em 0.25em black;
+}
+#gallery-wall-fullscreen-center {
+  height: 100%;
+  width: 100%;
+  left: 0;
+  position: absolute;
+  text-align: center;
+  cursor: grabbing;
+}
+#gallery-wall-fullscreen-center::before {
+  content: "";
+  height: 100%;
+  display: inline-block;
+  vertical-align: middle;
+}
+#gallery-wall-fullscreen-center img {
+  display: inline-block;
+  vertical-align: middle;
+}
+#gallery-wall-fullscreen-center img {
+  box-shadow: 1em 1em 3em 0.25em black;
+}
+#gallery-wall-fullscreen-index-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 5em;
+}
+#gallery-wall-fullscreen-index {
+  overflow-x: auto;
+  height: 5em;
+  display: flex;
+}
+#gallery-wall-fullscreen-index img {
+  height: 100%;
+  width: auto;
+  margin: 0 0.25em;
+  cursor: pointer;
+  opacity: 0.25;
+}
+#gallery-wall-fullscreen-index img:hover {
+  opacity: 1;
+}
+#gallery-wall-fullscreen-button-left {
+  top: 50%;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 3.5em;
+  width: 3.5em;
+  border-top-right-radius: 0.5em;
+  border-bottom-right-radius: 0.5em;
+  cursor: pointer;
+  position: absolute;
+  text-align: center;
+}
+#gallery-wall-fullscreen-button-left::before {
+  content: "";
+  height: 100%;
+  display: inline-block;
+  vertical-align: middle;
+}
+#gallery-wall-fullscreen-button-left img {
+  display: inline-block;
+  vertical-align: middle;
+}
+#gallery-wall-fullscreen-button-left img {
+  height: 50%;
+  width: auto;
+}
+#gallery-wall-fullscreen-button-left:hover {
+  background-color: rgba(78, 163, 161, 0.5);
+}
+#gallery-wall-fullscreen-button-right {
+  top: 50%;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 3.5em;
+  width: 3.5em;
+  border-top-left-radius: 0.5em;
+  border-bottom-left-radius: 0.5em;
+  cursor: pointer;
+  position: absolute;
+  text-align: center;
+}
+#gallery-wall-fullscreen-button-right::before {
+  content: "";
+  height: 100%;
+  display: inline-block;
+  vertical-align: middle;
+}
+#gallery-wall-fullscreen-button-right img {
+  display: inline-block;
+  vertical-align: middle;
+}
+#gallery-wall-fullscreen-button-right img {
+  height: 50%;
+  width: auto;
+}
+#gallery-wall-fullscreen-button-right:hover {
+  background-color: rgba(78, 163, 161, 0.5);
+}
+#gallery-wall-fullscreen-button-close {
+  top: 1em;
+  right: 1em;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 3.5em;
+  width: 3.5em;
+  border-radius: 0.5em;
+  cursor: pointer;
+  position: absolute;
+  text-align: center;
+}
+#gallery-wall-fullscreen-button-close::before {
+  content: "";
+  height: 100%;
+  display: inline-block;
+  vertical-align: middle;
+}
+#gallery-wall-fullscreen-button-close img {
+  display: inline-block;
+  vertical-align: middle;
+}
+#gallery-wall-fullscreen-button-close img {
+  height: 50%;
+  width: auto;
+}
+#gallery-wall-fullscreen-button-close:hover {
+  background-color: rgba(78, 163, 161, 0.5);
+}
+.gallery-wall-fullscreen-index-active {
+  opacity: 1 !important;
+}

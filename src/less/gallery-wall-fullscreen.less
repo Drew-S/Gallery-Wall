@@ -1,0 +1,163 @@
+.center {
+  position: absolute;
+  text-align: center;
+  &::before {
+    content: "";
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+
+  }
+  img {
+    display: inline-block;
+    vertical-align: middle;
+
+  }
+
+}
+
+#gallery-wall-fullscreen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.85);
+  visibility: hidden;
+  overflow: hidden;
+
+}
+
+#gallery-wall-fullscreen-left {
+  height: 100%;
+  width: 100%;
+  .center;
+  left: 0;
+  img {
+    box-shadow: 1em 1em 3em 0.25em black;
+
+  }
+
+}
+
+#gallery-wall-fullscreen-right {
+  height: 100%;
+  width: 100%;
+  .center;
+  right: 0;
+  img {
+    box-shadow: 1em 1em 3em 0.25em black;
+
+  }
+
+}
+
+#gallery-wall-fullscreen-center {
+  height: 100%;
+  width: 100%;
+  left: 0;
+  .center;
+  img {
+    box-shadow: 1em 1em 3em 0.25em black;
+
+  }
+
+}
+
+#gallery-wall-fullscreen-index-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 5em;
+
+}
+
+#gallery-wall-fullscreen-index {
+  overflow-x: auto;
+  height: 5em;
+  display: flex;
+  img {
+    height: 100%;
+    width: auto;
+    margin: 0 0.25em;
+    cursor: pointer;
+    opacity: 0.25;
+    &:hover {
+      opacity: 1;
+
+    }
+
+  }
+
+}
+
+#gallery-wall-fullscreen-button-left {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  background-color: rgba(0,0,0,0.5);
+  height: 3.5em;
+  width: 3.5em;
+  border-top-right-radius: 0.5em;
+  border-bottom-right-radius: 0.5em;
+  cursor: pointer;
+  .center;
+  img {
+    height: 50%;
+    width: auto;
+  }
+  &:hover {
+    background-color: rgba(78, 163, 161, 0.5);
+
+  }
+
+}
+
+#gallery-wall-fullscreen-button-right {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  background-color: rgba(0,0,0,0.5);
+  height: 3.5em;
+  width: 3.5em;
+  border-top-left-radius: 0.5em;
+  border-bottom-left-radius: 0.5em;
+  cursor: pointer;
+  .center;
+  img {
+    height: 50%;
+    width: auto;
+  }
+  &:hover {
+    background-color: rgba(78, 163, 161, 0.5);
+
+  }
+
+}
+
+#gallery-wall-fullscreen-button-close {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  background-color: rgba(0,0,0,0.5);
+  height: 3.5em;
+  width: 3.5em;
+  border-radius: 0.5em;
+  cursor: pointer;
+  .center;
+  img {
+    height: 50%;
+    width: auto;
+  }
+  &:hover {
+    background-color: rgba(78, 163, 161, 0.5);
+
+  }
+}
+
+.gallery-wall-fullscreen-index-active {
+  opacity: 1 !important;
+
+}
