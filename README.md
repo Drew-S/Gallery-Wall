@@ -8,6 +8,12 @@ Gallery Wall is a javascript gallery system for the web. It comes with two modul
 -   Multiple Gallery(s) (albums)
 -   Fullscreen mode
 
+### Libraries used
+
+I used the __velocity.js__ and the __dragscroll.js__ libraries for parts of the fullscreen module.
+
+[Dragscroll](https://github.com/asvd/dragscroll) and [Velocity](https://github.com/julianshapiro/velocity)
+
 ### Installation
 Download or clone, and copy the `src/` contents into your `scripts` folder:
 
