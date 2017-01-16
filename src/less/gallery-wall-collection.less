@@ -1,0 +1,135 @@
+@import 'gallery-wall';
+
+.center {
+  position: absolute;
+  text-align: center;
+  &::before {
+    content: "";
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+
+  }
+  img {
+    display: inline-block;
+    vertical-align: middle;
+
+  }
+
+}
+
+#gallery-wall-collection-images {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  width: 100%;
+  div {
+    float: left;
+    margin: 8px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    div {
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      position: absolute;
+      margin: 0;
+      display: block;
+      cursor: pointer;
+      margin: 0px;
+      &:hover {
+        box-shadow: inset 0em 0em 3em 0.25em lightblue;
+
+      }
+
+    }
+    img {
+      height: 100%;
+      margin: 0 auto;
+
+    }
+
+  }
+
+}
+
+#gallery-wall-collection-close {
+  z-index: 15;
+  position: fixed;
+  top: 1.5em;
+  right: 1.5em;
+  width: 3em;
+  height: 3em;
+  cursor: pointer;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.25);
+  .center;
+  &:hover {
+    background-color: rgba(77, 195, 203, 0.5);
+
+  }
+  img {
+    height: 50%;
+
+  }
+
+}
+
+
+#gallery-wall-collection-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  visibility: hidden;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 1em;
+
+}
+
+.gallery-wall-collection {
+  overflow: hidden;
+  display: flex;
+  width: auto;
+  max-width: 450px;
+  .gallery-wall;
+  div {
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    height: 200px;
+    margin: 0px !important;
+    position: relative !important;
+    float: left;
+    overflow: hidden;
+    display: flex;
+    img {
+      visibility: visible !important;
+      height: 100% !important;
+
+    }
+    div {
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      position: absolute !important;
+      margin: 0 !important;
+      display: block !important;
+      cursor: pointer;
+      box-shadow: none !important;
+      &:hover {
+        background-color: rgba(120, 221, 227, 0.25);
+
+      }
+
+    }
+
+  }
+
+}

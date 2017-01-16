@@ -31,11 +31,18 @@
     /*******************************************************************************
      *
      *  GalleryWall
-     *    CLASS_INFO
+     *    Gallery Wall is the primary module for the Gallery Wall system, It
+     *    will align the images in a <div> perfectly.
      *
-     *    Variables:  TYPE  VARIABLE  (SHORT_INFO)
+     *    Variables:  {DOM}     gallery    (the element to manage)
+     *                {Bool}    initaited  (used to check if init is ran once)
+     *                {Object}  options    (the options for the system)
      *
-     *    Functions:  RETURN  FUNCTION()  (SHORT_INFO)
+     *    Functions:  {NONE}  config()       (used to set options)
+     *                {NONE}  init()         (used to setup the gallery)
+     *                {NONE}  setWidth()     (sets the widths of images)
+     *                {Bool}  mobileCheck()  (checks to see if on a mobile device)
+     *                {Bool}  hasClass()     (checks element if has classname)
      *
      ******************************************************************************/
     return function GalleryWall(elem){
@@ -45,17 +52,18 @@
       this.options = {
         imageHeight: 300,
         margin: 8,
-        minWidth: 200 //minWidth <= imageHeight
+        minWidth: 200, //minWidth <= imageHeight (less than or equal to)
+        imageWidth: 350
 
       };
 
       /*
-       *  FUNCTION()
-       *    DESCRIPTION
+       *  config()
+       *    Used to set options values
        *
-       *    Input(s):  {TYPE} NAME (INFO)
+       *    Input(s): {Object} ops (the object of options to change)
        *
-       *    Output(s): TYPE (INFO)
+       *    Output(s): {NONE}
        */
       this.config = (ops) => {
         if(ops){
@@ -68,12 +76,12 @@
       }
 
       /*
-       *  FUNCTION()
-       *    DESCRIPTION
+       *  init()
+       *    Used to initiate the the gallery system, and align the images
        *
-       *    Input(s):  TYPE NAME (INFO)
+       *    Input(s):  {NONE}
        *
-       *    Output(s): TYPE (INFO)
+       *    Output(s): {NONE}
        */
       this.init = () => {
 
@@ -81,7 +89,7 @@
         var childNodes = this.gallery.childNodes;
         var ops = this.options;
 
-        if(!this.initiated){
+        if(!this.initiated){ // init already ran?
           this.initiated = true;
           var self = this;
           window.addEventListener("resize", () => { self.init(); }, false);
@@ -91,6 +99,7 @@
 
           }
 
+          // convert img elements into gallery system
           for(var i=0; i<childNodes.length; i++){
             if(childNodes[i].tagName == "IMG"){
               var div = document.createElement("div");
@@ -101,10 +110,22 @@
               this.gallery.appendChild(div);
               i--;
 
+            } else if(childNodes[i].tagName == "DIV"
+              && this.hasClass(childNodes[i], "gallery-wall-collection")){
+
+              var div = childNodes[i];
+              if(div.galleryWallMoved != "true"){
+                div.galleryWallMoved = "true"
+                this.gallery.removeChild(div);
+                this.gallery.appendChild(div);
+
+              }
+
             }
 
           }
 
+          // remove old img elements from gallery
           for(var i=0; i<this.gallery.childNodes.length; i++){
             if(this.gallery.childNodes[i].tagName == "IMG"){
               this.gallery.removeChild(this.gallery.childNodes[i]);
@@ -113,13 +134,15 @@
             }
 
           }
-          // this.init();
 
-        }
+        } // end initation check
 
         for(var i=0; i<children.length; i++){
           if(children[i].tagName == "DIV" || children[i].tagName == "IMG"){
-            children[i].style.width = "auto";
+            if(!this.hasClass(children[i], "gallery-wall-collection")){
+              children[i].style.width = "auto";
+
+            }
 
           }
 
@@ -128,10 +151,14 @@
         var widthTotal = this.gallery.offsetWidth;
         var widthCur = 0;
 
+        // align elements
         var start = 0;
         for(var i=0; i<children.length; i++){
           if(children[i].tagName == "DIV"){
-            children[i].firstChild.style.visibility = "visible";
+            if(!this.hasClass(children[i], "gallery-wall-collection")){
+              children[i].firstChild.style.visibility = "visible";
+
+            }
             widthCur += children[i].offsetWidth + (ops.margin * 2);
             if(widthCur >= widthTotal){
               this.setWidth(children, start, i, widthCur, widthTotal, ops.minWidth);
@@ -160,18 +187,23 @@
       };
 
       /*
-       *  FUNCTION()
-       *    DESCRIPTION
+       *  setWidth()
+       *    Used to set a row of images widths for perfect alignment
        *
-       *    Input(s):  TYPE NAME (INFO)
+       *    Input(s):  {Array} children   (the array of elements to align)
+       *               {Int}   start      (the starting point to align in array)
+       *               {Int}   end        (the ending point to align in array)
+       *               {Int}   widthCur   (the current width of the elements)
+       *               {Int}   widthTotal (the total width)
+       *               {Int}   minWidth   (the minumum width of the element)
        *
-       *    Output(s): TYPE (INFO)
+       *    Output(s): {NONE}
        */
       this.setWidth = (children, start, end, widthCur, widthTotal, minWidth) => {
         var sacrifice = [];
         var difference = widthCur - widthTotal;
         for(var i=start; i<=end; i++){
-          if(children[i].clientWidth - minWidth < 0){
+          if(children[i].clientWidth - minWidth < 0 || this.hasClass(children[i], "gallery-wall-collection")){
             sacrifice.push(0);
 
           } else {
@@ -201,12 +233,12 @@
       };
 
       /*
-       *  FUNCTION()
-       *    DESCRIPTION
+       *  mobileCheck()
+       *    Used to check the browser to see if user is on mobile
        *
-       *    Input(s):  TYPE NAME (INFO)
+       *    Input(s):  {NONE}
        *
-       *    Output(s): TYPE (INFO)
+       *    Output(s): {Bool} (true/false if they are on mobile)
        */
       this.mobileCheck = () => {
         var check = false;
@@ -214,7 +246,25 @@
         return check;
       };
 
-    };
+      /*
+      *  hasClass()
+      *    Checks a given element to see if the given class is in the element
+      *
+      *    Input(s):  {DOM}    elem      (the element to check)
+      *               {String} className (the name to check for)
+      *
+      *    Output(s): {Bool} (true/false, has the class name or not)
+      */
+      this.hasClass = (elem, className) => {
+        if(elem.classList){return elem.classList.contains(className);}
+        else if(elem.className) {return !!elem.className.match(new RegExp('(\\s|^)'
+        + className + '(\\s|$)'));}
+        else {return false;}
 
+      };
+
+      this.init();
+
+    };
 
 }));

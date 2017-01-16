@@ -23,13 +23,41 @@
   }
 }(this, function (Velocity, Dragscroll) {
 
+
+  /*******************************************************************************
+   *
+   *  CLASS
+   *    CLASS_INFO
+   *
+   *    Variables:  {DOM}    fullscreen  (the fullscreen element to create window)
+   *                {Array}  galleries   (the galleries to manage)
+   *                {Bool}   animte      (flag if animation in progress)
+   *                {Bool}   open        (flag if fullscreen is open)
+   *                {Int}    duration    (the duration of animation, in ms)
+   *
+   *    Functions:  {NONE}  moveMain()         (used to mange movement of the
+   *                                            main image)
+   *                {NONE}  indexManage()      (manage index mouse event)
+   *                {NONE}  upMain()           (manage up mouse event)
+   *                {NONE}  init()             (initiate system)
+   *                {NONE}  buildFullscreen()  (build fullscreen elements)
+   *                {NONE}  attach()           (attach click events)
+   *                {Int}   add()              (add gallery to manager)
+   *                {NONE}  remove()           (remove gallery from manager)
+   *                {NONE}  openFullscreen()   (opens fullscreen)
+   *                {NONE}  closeFullscreen()  (closes fullscreen)
+   *                {NONE}  buildIndex()       (builds index for fullscreen)
+   *                {Bool}  hasClass()         (checks elem for class)
+   *                {NONE}  addClass()         (adds class to elem)
+   *                {NONE}  removeClass()      (removes class from elem)
+   *
+   ******************************************************************************/
   return function GalleryWallFullscreen(...args) {
     this.fullscreen = document.getElementById('gallery-wall-fullscreen');
 
-    // this.galleries = args;
     this.galleries = [];
-    // this.srcs = [];
     this.animate = false;
+    this.open = true;
 
     this.duration = 350;
 
@@ -38,6 +66,14 @@
 
     }
 
+    /*
+     *  moveMain()
+     *    Used to manage mouse movement on mouse down
+     *
+     *    Input(s):  {Event} e (mouse event)
+     *
+     *    Output(s): {NONE}
+     */
     this.moveMain = (e) => {
       this.center.style.left = (e.clientX - this.start) + "px";
       this.left.style.left = this.center.offsetWidth + (e.clientX - this.start) + "px";
@@ -46,6 +82,28 @@
 
     }
 
+    /*
+     *  indexManage()
+     *    Used to prevent mouse click events on mouse drag event
+     *
+     *    Input(s):  {Event} e (mouse event)
+     *
+     *    Output(s): {NONE}
+     */
+    this.indexManage = (e) => {
+      if(e.clientX != this.start) this.open = false;
+      else this.open = true;
+
+    }
+
+    /*
+     *  upMain()
+     *    Used to manage mouse up event on dragging of the main image
+     *
+     *    Input(s):  {NONE}
+     *
+     *    Output(s): {NONE}
+     */
     this.upMain = () => {
       window.removeEventListener("mousemove", this.moveMain, true);
       window.removeEventListener("mouseup", this.upMain, true);
@@ -109,12 +167,12 @@
     }
 
     /*
-     *  FUNCTION()
-     *    DESCRIPTION
+     *  init()
+     *    Used to initiate the gallery system
      *
-     *    Input(s):  TYPE NAME (INFO)
+     *    Input(s):  {NONE}
      *
-     *    Output(s): TYPE (INFO)
+     *    Output(s): {NONE}
      */
     this.init = () => {
       this.buildFullscreen();
@@ -124,12 +182,12 @@
     }
 
     /*
-     *  FUNCTION()
-     *    DESCRIPTION
+     *  buildFullscreen()
+     *    used to build the fullscreen element
      *
-     *    Input(s):  TYPE NAME (INFO)
+     *    Input(s):  {NONE}
      *
-     *    Output(s): TYPE (INFO)
+     *    Output(s): {NONE}
      */
     this.buildFullscreen = () => {
       this.mainWrapper = document.createElement('div');
@@ -185,18 +243,19 @@
     };
 
     /*
-     *  FUNCTION()
-     *    DESCRIPTION
+     *  attach()
+     *    used to attach mouse click events to images for fullscreen
      *
-     *    Input(s):  TYPE NAME (INFO)
+     *    Input(s):  {NONE}
      *
-     *    Output(s): TYPE (INFO)
+     *    Output(s): {NONE}
      */
     this.attach = () => {
       var gals = this.galleries;
       for(var g of gals){
         for(var i of g.gallery.children){
-          if(i.tagName == "DIV" && i.firstChild.tagName == "IMG" || i.tagName == "IMG"){
+          if((i.tagName == "DIV" && i.firstChild.tagName == "IMG"
+              || i.tagName == "IMG") && !this.hasClass(i, "gallery-wall-collection")){
             if(i.tagName == "DIV"){
               g.sources.push(i.firstChild.src);
               var src = g.sources.indexOf(i.firstChild.src);
@@ -225,12 +284,67 @@
     };
 
     /*
-     *  FUNCTION()
+     *  add()
+     *    used to add a new gallery to manage
+     *
+     *    Input(s):  {DOM} elem (the element to add to galleries manager)
+     *
+     *    Output(s): {Int} (index of the added element)
+     */
+    this.add = (elem) => {
+      var index = this.galleries.length;
+      this.galleries.push({ gallery: elem, sources: [], index: null });
+      for(var i of this.galleries[index].gallery.children){
+        if((i.tagName == "DIV" && i.firstChild.tagName == "IMG"
+            || i.tagName == "IMG") && !this.hasClass(i, "gallery-wall-collection")){
+          if(i.tagName == "DIV"){
+            this.galleries[index].sources.push(i.firstChild.src);
+            var src = this.galleries[index].sources.indexOf(i.firstChild.src);
+
+          } else {
+            this.galleries[index].sources.push(i.src);
+            var src = this.galleries[index].sources.indexOf(i.src);
+
+          }
+
+          let srcc = src;
+
+          i.ondragstart = () => { return false; };
+
+          i.onclick = () => {
+            this.openFullscreen(index, srcc);
+
+          };
+
+        }
+
+      }
+      this.buildIndex();
+      return index;
+
+    };
+
+    /*
+     *  remove()
+     *    used to remove a gallery from the system
+     *
+     *    Input(s):  {Int} index (the index of the element to remove)
+     *
+     *    Output(s): {NONE}
+     */
+    this.remove = (index) => {
+      this.galleries.splice(index, 1);
+
+    }
+
+    /*
+     *  openFullscreen()
      *    DESCRIPTION
      *
-     *    Input(s):  TYPE NAME (INFO)
+     *    Input(s):  {Int} gal   (the index of the gallery
+     *               {Int} index (the index of the image)
      *
-     *    Output(s): TYPE (INFO)
+     *    Output(s): {NONE}
      */
     this.openFullscreen = (gal, index) => {
 
@@ -299,6 +413,15 @@
       this.right.style.right = - this.center.offsetWidth + "px";
 
       if(!this.indexWrapper.firstChild) this.indexWrapper.appendChild(galy.index);
+      var w = 0;
+      var id = 0;
+      for(var i of this.indexWrapper.firstChild.children){
+        w += i.offsetWidth + 8;
+        id++;
+
+      }
+      this.indexWrapper.firstChild.style.width = w + "px";
+      Dragscroll.reset();
 
       if(imgC.offsetHeight > h){
         imgC.style.height = (h-10) + "px";
@@ -388,12 +511,12 @@
     };
 
     /*
-     *  FUNCTION()
-     *    DESCRIPTION
+     *  closeFullscreen()
+     *    used to close / refresh the fullscreen
      *
-     *    Input(s):  TYPE NAME (INFO)
+     *    Input(s):  {Bool} h (boolean, hide the fullscreen (complete close))
      *
-     *    Output(s): TYPE (INFO)
+     *    Output(s): {NONE}
      */
     this.closeFullscreen = (h=true) => {
       this.left.style.visibility = "hidden";
@@ -417,52 +540,66 @@
     };
 
     /*
-     *  FUNCTION()
-     *    DESCRIPTION
+     *  buildIndex()
+     *    Used to build the index of the gallery fullscreen
      *
-     *    Input(s):  TYPE NAME (INFO)
+     *    Input(s):  {NONE}
      *
-     *    Output(s): TYPE (INFO)
+     *    Output(s): {NONE}
      */
     this.buildIndex = () => {
 
       var gals = this.galleries;
       for(var i of gals){
-        var index = document.createElement('div');
-        index.id = "gallery-wall-fullscreen-index";
-        this.addClass(index, 'dragscroll');
-        for(var j of i.sources){
-          var img = document.createElement("img");
-          img.src = j;
+        if(!i.index){
+          var index = document.createElement('div');
+          index.id = "gallery-wall-fullscreen-index";
+          this.addClass(index, 'dragscroll');
+          for(var j of i.sources){
+            var img = document.createElement("img");
+            img.src = j;
 
-          var src = i.sources.indexOf(j);
-          let srcc = src;
-          let g = i;
+            var src = i.sources.indexOf(j);
+            let srcc = src;
+            let g = i;
 
-          img.ondragstart = () => { return false; };
+            img.ondragstart = () => { return false; };
 
-          img.onclick = () => {
-            this.closeFullscreen(false);
-            this.openFullscreen(gals.indexOf(g), srcc);
+            img.onmousedown = (e) => {
+              window.addEventListener("mouseup", this.indexManage, false);
+              this.start = e.clientX;
+
+            };
+
+            img.onclick = () => {
+              if(this.open){
+                this.closeFullscreen(false);
+                this.openFullscreen(gals.indexOf(g), srcc);
+
+              }
+              this.open = true;
+
+            }
+
+            index.appendChild(img);
 
           }
-
-          index.appendChild(img);
+          i.index = index;
 
         }
-        i.index = index;
 
       }
 
     };
 
     /*
-     *  FUNCTION()
-     *    DESCRIPTION
+     *  hasClass()
+     *    Used to check element to see it has the class name
      *
-     *    Input(s):  TYPE NAME (INFO)
+     *    Input(s):  {DOM}    elem      (the element to check)
+     *               {String} className (the name to check)
      *
-     *    Output(s): TYPE (INFO)
+     *    Output(s): {Bool} (true/false element has class name)
      */
     this.hasClass = (elem, className) => {
       if(elem.classList){return elem.classList.contains(className);}
@@ -473,12 +610,13 @@
     };
 
     /*
-     *  FUNCTION()
-     *    DESCRIPTION
+     *  removeClass()
+     *    Used to remove class name from element
      *
-     *    Input(s):  TYPE NAME (INFO)
+     *    Input(s):  {DOM}    elem      (the element to remove from)
+     *               {String} className (the name to remove)
      *
-     *    Output(s): TYPE (INFO)
+     *    Output(s): {NONE}
      */
     this.removeClass = (elem, className) => {
       if (elem.classList){elem.classList.remove(className);}
@@ -491,18 +629,21 @@
     };
 
     /*
-     *  FUNCTION()
-     *    DESCRIPTION
+     *  addClass()
+     *    Used to add a class name to the element
      *
-     *    Input(s):  TYPE NAME (INFO)
+     *    Input(s):  {DOM}    elem      (the element to add to)
+     *               {String} className (the name to add)
      *
-     *    Output(s): TYPE (INFO)
+     *    Output(s): {NONE}
      */
     this.addClass = (elem, className) => {
       if (elem.classList){elem.classList.add(className);}
       else if (!this.hasClass(elem, className)) elem.className += " " + className;
 
     };
+
+    this.init();
 
   };
 
