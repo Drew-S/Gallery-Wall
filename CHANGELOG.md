@@ -39,3 +39,7 @@
 - Added changelog
 - Fixed alignment issue
 - Fixed global naming
+
+# Version 2.4.1
+
+- Fixed global naming issue in Fullscreen (root.velocity -> root.Velocity)

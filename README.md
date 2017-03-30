@@ -1,4 +1,4 @@
-# Gallery Wall v2.4.0
+# Gallery Wall v2.4.1
 
 Gallery wall is a front end javascript gallery system built with 3 modules to provide a beautify gallery.
 
