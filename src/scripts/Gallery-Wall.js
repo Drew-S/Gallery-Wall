@@ -19,7 +19,7 @@
         module.exports = factory();
     } else {
         // Browser globals (root is window)
-        root.returnExports = factory();
+        root.GalleryWall = factory();
   }
 }(this, function () {
 

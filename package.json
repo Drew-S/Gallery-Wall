@@ -1,0 +1,37 @@
+{
+  "name": "gallery-wall",
+  "version": "1.0.0",
+  "description": "A front end Javascript gallery system",
+  "main": "lib/index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "exif": "^0.6.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-clean-css": "^3.0.3",
+    "gulp-ext-replace": "^0.3.0",
+    "gulp-jsbeautifier": "^2.0.4",
+    "gulp-sass": "^3.1.0",
+    "gulp-uglify": "^2.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Drew-S/Gallery-Wall.git"
+  },
+  "keywords": [
+    "Javascript",
+    "gallery"
+  ],
+  "author": "Drew Sommer Drew-S@github.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Drew-S/Gallery-Wall/issues"
+  },
+  "homepage": "https://github.com/Drew-S/Gallery-Wall#readme"
+}

@@ -16,10 +16,10 @@
         // Node. Does not work with strict CommonJS, but
         // only CommonJS-like environments that support module.exports,
         // like Node.
-        module.exports = factory(require('./velocity'), require('./dragscroll'));
+        module.exports = factory(require('velocity'), require('dragscroll'));
     } else {
         // Browser globals (root is window)
-        root.returnExports = factory(root.velocity, root.dragscroll);
+        root.GalleryWallFullscreen = factory(root.velocity, root.dragscroll);
   }
 }(this, function (Velocity, Dragscroll) {
 

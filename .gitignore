@@ -1,2 +1,15 @@
 .directory
 bower_components
+main.js
+lib/require.js
+lib/velocity.js
+lib/dragscroll.js
+lib/require.js
+node_modules
+test.html
+lib/less
+lib/wp_plugin
+src
+bower.json
+gulpfile.js
+node.template.js

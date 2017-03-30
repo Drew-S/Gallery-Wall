@@ -1,0 +1,81 @@
+.gallery-wall {
+    width: 100%;
+    display: table;
+}
+
+.gallery-wall img {
+    visibility: hidden;
+}
+
+.gallery-wall div {
+    position: relative;
+    float: left;
+    overflow: hidden;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.gallery-wall div img {
+    height: 100%;
+}
+
+.gallery-wall div div {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    margin: 0 !important;
+    display: block !important;
+    box-shadow: inset 0em 0em 0.125em 0.0125em black;
+    cursor: pointer;
+}
+
+.gallery-wall div div:hover {
+    box-shadow: inset 0em 0em 1.5em 0.25em rgba(150, 230, 218, 0.5);
+}
+
+.gallery-wall div div:hover .gallery-wall-info {
+    visibility: visible !important;
+}
+
+.gallery-wall-info {
+    color: white;
+    text-shadow: 0em 0em 0.125em black;
+    visibility: hidden;
+}
+
+.gallery-wall-info-span {
+    width: 100%;
+}
+
+.gallery-wall-info-left {
+    margin-left: 16px;
+}
+
+.gallery-wall-info-right {
+    float: right;
+    margin-right: 16px;
+}
+
+.gallery-wall-info-detail {
+    position: relative !important;
+    box-shadow: none !important;
+    width: 100% !important;
+    background-color: rgba(0, 0, 0, 0.25);
+    box-shadow: 0em -1em 2em rgba(0, 0, 0, 0.25) !important;
+    top: 40% !important;
+}
+
+.gallery-wall-info-detail-hidden {
+    visibility: hidden;
+}
+
+.gallery-wall-info-icon {
+    height: 16px !important;
+    width: 16px;
+}
+
+.gallery-wall-info-name {
+    margin-left: 16px;
+}
